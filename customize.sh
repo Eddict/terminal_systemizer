@@ -77,6 +77,10 @@ if [ $no_xml = 0 ]; then
   cp -af $TMPDIR/$MODID/permissions $MODPATH/system/etc
 fi
 
+# Copy common files
+cp -af $TMPDIR/aapt $MODPATH/aapt
+cp -af $TMPDIR/mod-util.sh $MODPATH/mod-util.sh
+
 ##########################################################################################
 # Permissions
 ##########################################################################################
@@ -84,8 +88,6 @@ fi
 set_permissions() {
   set_perm_recursive $MODPATH 0 0 0755 0644
   
-  cp -af $TMPDIR/aapt $MODPATH/aapt
-  cp -af $TMPDIR/mod-util.sh $MODPATH/mod-util.sh
   bin=xbin
   if [ ! -d /system/xbin ]; then
     bin=bin
