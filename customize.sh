@@ -71,10 +71,6 @@ if [ $no_xml -eq 0 ]; then
   cp -af $TMPDIR/$MODID/permissions $MODPATH/system/etc
 fi
 
-# Copy common files
-cp -af $TMPDIR/aapt $MODPATH/aapt
-cp -af $TMPDIR/mod-util.sh $MODPATH/mod-util.sh
-
 ##########################################################################################
 # Permissions
 ##########################################################################################
@@ -82,8 +78,12 @@ cp -af $TMPDIR/mod-util.sh $MODPATH/mod-util.sh
 set_permissions() {
   set_perm_recursive $MODPATH 0 0 0755 0644
   
-  # Get selinux value from copied module.prop
-  se_value=$(grep_prop selinux $NVBASE/modules/$MODID/module.prop)
+  # Copy common files
+  cp -af $TMPDIR/aapt $MODPATH/aapt
+  cp -af $TMPDIR/mod-util.sh $MODPATH/mod-util.sh
+  
+  # Get selinux value from previous module installation (if exists)
+  se_value=$(grep_prop selinux $COPYPATH/module.prop)
   if [ "$se_value" != "true" ]; then
     se_value=false
   fi
