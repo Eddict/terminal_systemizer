@@ -66,13 +66,13 @@ fi
 ui_print "- Extracting module files"
 unzip -o "$ZIPFILE" 'system/*' -d $MODPATH >&2
 
-if [ $no_app == 0 ]; then
+if [ $no_app = 0 ]; then
   cp -af $TMPDIR/$MODID/app $MODPATH/system
 fi
-if [ $no_privapp == 0 ]; then
+if [ $no_privapp = 0 ]; then
   cp -af $TMPDIR/$MODID/priv-app $MODPATH/system
 fi
-if [ $no_xml == 0 ]; then
+if [ $no_xml = 0 ]; then
   mkdir -p $MODPATH/system/etc
   cp -af $TMPDIR/$MODID/permissions $MODPATH/system/etc
 fi
@@ -99,5 +99,3 @@ set_permissions() {
   set_perm $MODPATH/mod-util.sh 0 0 0777
   echo "selinux=${se_value}" >> $MODPATH/module.prop
 }
-
-set_permissions
