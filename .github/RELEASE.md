@@ -30,6 +30,28 @@ This repository uses GitHub Actions to automatically build and publish Magisk mo
    - Create a GitHub Release
    - Attach the ZIP as a downloadable asset
 
+## Manual Workflow Trigger
+
+You can manually trigger the release workflow from the GitHub Actions tab:
+
+### Option 1: Rebuild Latest Release
+1. Go to **Actions** → **Create Magisk Module Release**
+2. Click **Run workflow**
+3. Leave the version field **empty**
+4. Click **Run workflow** button
+5. The workflow will automatically use the latest tag
+
+### Option 2: Rebuild Specific Version
+1. Go to **Actions** → **Create Magisk Module Release**
+2. Click **Run workflow**
+3. Enter a version tag (e.g., `v18.0.0`)
+4. Click **Run workflow** button
+
+**Note**: The tag must already exist in the repository. This is useful for:
+- Rebuilding a release after fixing an issue
+- Updating release assets without creating a new version
+- Testing the build process
+
 ## Manual Release (Alternative)
 
 If you prefer to create releases manually:

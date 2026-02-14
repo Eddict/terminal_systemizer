@@ -4,6 +4,12 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag (e.g., v18.0.0) - leave empty to use latest tag'
+        required: false
+        type: string
 
 jobs:
   build-release:
@@ -15,10 +21,28 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history and tags
 
-      - name: Get version from tag
+      - name: Determine version
         id: version
-        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            # Triggered by tag push
+            VERSION="${GITHUB_REF#refs/tags/}"
+          elif [ -n "${{ github.event.inputs.version }}" ]; then
+            # Manual trigger with version specified
+            VERSION="${{ github.event.inputs.version }}"
+          else
+            # Manual trigger without version - use latest tag
+            VERSION=$(git describe --tags --abbrev=0)
+          fi
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "Using version: $VERSION"
+
+      - name: Checkout version
+        run: |
+          git checkout ${{ steps.version.outputs.VERSION }}
 
       - name: Create Magisk module ZIP
         run: |
@@ -33,6 +57,7 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{ steps.version.outputs.VERSION }}
           files: terminal_systemizer-${{ steps.version.outputs.VERSION }}.zip
           name: Terminal Systemizer ${{ steps.version.outputs.VERSION }}
           body: |
