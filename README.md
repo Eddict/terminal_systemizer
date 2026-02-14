@@ -1,6 +1,12 @@
 ## App Systemizer (Terminal Emulator)
 [More info and details in the XDA Thread](https://forum.xda-developers.com/apps/magisk/module-terminal-app-systemizer-ui-t3585851)
 
+## Download
+
+**Latest Release**: [Download from Releases](https://github.com/Eddict/terminal_systemizer/releases/latest)
+
+Download the latest `terminal_systemizer-v*.zip` file from the [Releases page](https://github.com/Eddict/terminal_systemizer/releases).
+
  Systemize your App systemlessly!
  Using terminal emulator.
  Enter this command and choose the app you want to systemize.
