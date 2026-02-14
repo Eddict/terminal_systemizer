@@ -49,7 +49,7 @@ jobs:
             - Android 6.0+
 
             ### What's Changed
-            See [README.md](https://github.com/Eddict/terminal_systemizer/blob/master/README.md) for full changelog.
+            See [README.md](https://github.com/${{ github.repository }}/blob/master/README.md) for full changelog.
           draft: false
           prerelease: false
         env:
