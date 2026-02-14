@@ -57,12 +57,6 @@ else
   no_xml=1
 fi
 
-# Perform additional stuff
-se_value=$(grep_prop selinux $COPYPATH/module.prop)
-if [ "$se_value" != "true" ]; then
-  se_value=false
-fi
-
 ui_print "- Extracting module files"
 unzip -o "$ZIPFILE" 'system/*' -d $MODPATH >&2
 
