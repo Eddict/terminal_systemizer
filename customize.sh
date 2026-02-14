@@ -78,11 +78,12 @@ fi
 set_permissions() {
   set_perm_recursive $MODPATH 0 0 0755 0644
   
-  # Copy common files
+  # Copy common files (aapt and mod-util.sh are extracted to $TMPDIR by Magisk framework from common/ directory)
   cp -af $TMPDIR/aapt $MODPATH/aapt
   cp -af $TMPDIR/mod-util.sh $MODPATH/mod-util.sh
   
   # Get selinux value from previous module installation (if exists)
+  # $COPYPATH is defined in main script and remains in scope
   se_value=$(grep_prop selinux $COPYPATH/module.prop)
   if [ "$se_value" != "true" ]; then
     se_value=false
@@ -93,8 +94,7 @@ set_permissions() {
     bin=bin
     mkdir $MODPATH/system/$bin
     mv $MODPATH/system/xbin/systemize $MODPATH/system/$bin
-    rm -rf $MODPATH/system/xbin/*
-    rmdir $MODPATH/system/xbin
+    rm -rf $MODPATH/system/xbin
   fi
   set_perm $MODPATH/system/$bin/systemize 0 0 0777
   set_perm $MODPATH/aapt 0 0 0777
