@@ -66,13 +66,13 @@ fi
 ui_print "- Extracting module files"
 unzip -o "$ZIPFILE" 'system/*' -d $MODPATH >&2
 
-if [ $no_app = 0 ]; then
+if [ $no_app -eq 0 ]; then
   cp -af $TMPDIR/$MODID/app $MODPATH/system
 fi
-if [ $no_privapp = 0 ]; then
+if [ $no_privapp -eq 0 ]; then
   cp -af $TMPDIR/$MODID/priv-app $MODPATH/system
 fi
-if [ $no_xml = 0 ]; then
+if [ $no_xml -eq 0 ]; then
   mkdir -p $MODPATH/system/etc
   cp -af $TMPDIR/$MODID/permissions $MODPATH/system/etc
 fi
@@ -87,6 +87,12 @@ cp -af $TMPDIR/mod-util.sh $MODPATH/mod-util.sh
 
 set_permissions() {
   set_perm_recursive $MODPATH 0 0 0755 0644
+  
+  # Get selinux value from copied module.prop
+  se_value=$(grep_prop selinux $NVBASE/modules/$MODID/module.prop)
+  if [ "$se_value" != "true" ]; then
+    se_value=false
+  fi
   
   bin=xbin
   if [ ! -d /system/xbin ]; then
