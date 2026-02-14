@@ -1,0 +1,56 @@
+name: Create Magisk Module Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+      - name: Create Magisk module ZIP
+        run: |
+          # Create ZIP with only necessary files
+          zip -r terminal_systemizer-${{ steps.version.outputs.VERSION }}.zip \
+            META-INF/ \
+            common/ \
+            system/ \
+            customize.sh \
+            module.prop
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: terminal_systemizer-${{ steps.version.outputs.VERSION }}.zip
+          name: Terminal Systemizer ${{ steps.version.outputs.VERSION }}
+          body: |
+            ## Terminal Systemizer ${{ steps.version.outputs.VERSION }}
+
+            ### Installation
+            1. Download `terminal_systemizer-${{ steps.version.outputs.VERSION }}.zip`
+            2. Flash in Magisk Manager or custom recovery (TWRP)
+            3. Reboot
+            4. Run `systemize` command in terminal
+
+            ### Requirements
+            - Magisk v20.4+
+            - Android 6.0+
+
+            ### What's Changed
+            See [README.md](https://github.com/Eddict/terminal_systemizer/blob/master/README.md) for full changelog.
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
