@@ -20,6 +20,12 @@ or
 
 ## Changelog
 
+### v18.0.0
+* Modernized to current Magisk module template format
+* Updated to use customize.sh instead of install.sh
+* Requires Magisk v20.4+ (was v18.0+)
+* Updated module installer to latest official version
+
 ### v17.4.1
 * More Android 11 support by jenslody
 
