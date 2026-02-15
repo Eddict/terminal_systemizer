@@ -59,7 +59,7 @@ elif [ -x $SYSTEM2/xbin/busybox ]; then
 elif [ -x $SYSTEM2/bin/busybox ]; then
   _bb=$SYSTEM2/bin/busybox
 else
-  echo "! Busybox not detected in any known location"
+  echo "! BusyBox not detected in any known location"
   echo "! Checked: Magisk directories and system paths"
   echo "! Continuing with system tools (may be slower)"
   echo "! To improve performance, install @osm0sis' busybox module"
