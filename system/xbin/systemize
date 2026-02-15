@@ -142,7 +142,7 @@ list_installed_apps() {
         # Try to get friendly app name from aapt, fall back to package name if it fails
         if $use_aapt; then
           # Capture aapt output and check its exit code directly (not the pipeline's)
-          if app_label=$(aapt d badging ${dir_app[c]} 2>/dev/null); then
+          if app_label=$(aapt d badging "${dir_app[c]}" 2>/dev/null); then
             # aapt succeeded, extract the label
             app_label=$(echo "$app_label" | grep 'application-label:' | head -1)
             if [ -n "$app_label" ]; then
@@ -178,7 +178,7 @@ list_systemized_apps() {
     # Try to get friendly app name from aapt, fall back to label if it fails
     if $use_aapt; then
       # Capture aapt output and check its exit code directly (not the pipeline's)
-      if app_label=$(aapt d badging $i 2>/dev/null); then
+      if app_label=$(aapt d badging "$i" 2>/dev/null); then
         # aapt succeeded, extract the label
         app_label=$(echo "$app_label" | grep 'application-label:' | head -1)
         if [ -n "$app_label" ]; then
@@ -213,7 +213,7 @@ systemize() {
       name=$(echo $name | tr -d ' ' | tr -d "'" | tr -d '*' | tr -d '-')
       if $use_aapt; then
         # Capture aapt output and check its exit code directly (not the pipeline's)
-        if pkg_name=$(aapt d badging $apkdir 2>/dev/null); then
+        if pkg_name=$(aapt d badging "$apkdir" 2>/dev/null); then
           # aapt succeeded, extract package name
           pkg_name=$(echo "$pkg_name" | head -n1 | awk '{print $2}')
           if [ -n "$pkg_name" ]; then
@@ -295,7 +295,7 @@ enter_apk_dir() {
       name=${apk%'.apk'*}
       if $use_aapt; then
         # Capture aapt output and check its exit code directly (not the pipeline's)
-        if pkg_name=$(aapt d badging $apkdir 2>/dev/null); then
+        if pkg_name=$(aapt d badging "$apkdir" 2>/dev/null); then
           # aapt succeeded, extract package name
           pkg_name=$(echo "$pkg_name" | head -n1 | awk '{print $2}')
           if [ -n "$pkg_name" ]; then
