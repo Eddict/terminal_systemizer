@@ -10,6 +10,13 @@ This repository uses GitHub Actions to automatically build and publish Magisk mo
    versionCode=81
    ```
 
+## Important Notes
+
+- The module is modernized to use the latest Magisk template format
+- Requires Magisk v20.4+ (version code 20400)
+- Code is compatible with Android 6-15+, but only tested up to Android 11
+- If you test on Android 12+, please report your results!
+
 2. **Update changelog in `README.md`**
 
 3. **Commit changes**:
