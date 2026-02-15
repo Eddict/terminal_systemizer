@@ -2,6 +2,7 @@
 # Terminal Magisk Mod Template
 # by veez21 @ xda-developers
 # Android 11 support by KreAch3R, jenslody @xda-developers
+# Modernized for current Magisk by Eddict
 
 # Magisk Module ID **
 ID="terminal_systemizer"
@@ -569,7 +570,7 @@ menu() {
     3) enter_apk_dir; exit $?;;
     4) revert_apps; exit $?;;
 
-    d|D) am start https://paypal.me/veez21 >>$LOG 2>&1;;
+    d|D) am start https://github.com/sponsors/Eddict >>$LOG 2>&1;;
     logs) upload_logs;;
     s|S) set_selinux;;
     0) exit;;

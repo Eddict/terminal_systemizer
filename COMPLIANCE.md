@@ -4,7 +4,7 @@ This document verifies that the Terminal Systemizer module complies with the off
 
 **Guidelines Reference:** https://topjohnwu.github.io/Magisk/guides.html  
 **Last Verified:** 2026-02-14  
-**Module Version:** v18.0.0
+**Module Version:** v18.0.2
 
 ## Compliance Status: ✅ FULLY COMPLIANT
 
@@ -19,8 +19,8 @@ All mandatory Magisk module guidelines are honored. The module follows the offic
 **Required Fields (Strict Format):**
 - ✅ `id=terminal_systemizer` - Valid format matching `^[a-zA-Z][a-zA-Z0-9._-]+$`
 - ✅ `name=App Systemizer (Terminal Emulator)` - Single-line string
-- ✅ `version=v18.0.0` - Single-line string
-- ✅ `versionCode=80` - Integer value
+- ✅ `version=v18.0.2` - Single-line string
+- ✅ `versionCode=82` - Integer value
 - ✅ `author=veez21, KreAch3R, Eddict` - Single-line string
 - ✅ `description=Turn apps to System Apps Systemlessly! Supports all device running Magisk v20.4+` - Single-line string
 
