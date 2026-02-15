@@ -53,6 +53,11 @@ If you've successfully used this module on Android 12+, please report your resul
 
 ## Changelog
 
+### v18.0.7
+* **CRITICAL FIX**: Initialize counter variable `c=0` in list_installed_apps()
+* Fixes empty app list when trying to systemize installed apps
+* App listing now works correctly on all Android versions (6-15)
+
 ### v18.0.6
 * Improved BusyBox detection to check Magisk installation directories first
 * Added support for multiple Magisk BusyBox locations

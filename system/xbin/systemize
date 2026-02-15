@@ -121,7 +121,7 @@ list_installed_apps() {
         se_set=false
       fi
     fi
-    rm $LISTFILE 2>>$LOG; app=(); app1=(); app2=();
+    rm $LISTFILE 2>>$LOG; app=(); app1=(); app2=(); c=0
     for i in $($method | sed 's/.*://'); do
       h=$(((h+1)%4))
       Spinner "Loading Apps"
