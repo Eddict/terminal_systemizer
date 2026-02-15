@@ -20,11 +20,44 @@ or
  And you will be presented with a list of installed apps.
  And Reboot to apply changes.
 
+## Compatibility
+
+### Tested & Verified
+- ✅ **Android 6-10** (API 23-29) - Original developer testing
+- ✅ **Android 11** (API 30) - Verified by KreAch3R, jenslody
+
+### Theoretical Support (Code Updated, Untested)
+- ⚠️ **Android 12** (API 31) - Should work (using Android 11 path structure)
+- ⚠️ **Android 13** (API 32) - Should work (using Android 11 path structure)
+- ⚠️ **Android 14** (API 33) - Should work (using Android 11 path structure)
+- ⚠️ **Android 15** (API 34) - Should work (using Android 11 path structure)
+
+### Requirements
+- **Magisk**: v20.4+ (version code 20400)
+- **Root**: Required
+- **Architecture**: All (arm, arm64, x86, x64)
+
+### Known Limitations
+- Android 11+ requires appropriate storage permissions for manual APK selection
+- Some system apps may be blocked by SELinux policies on newer Android versions
+- Package visibility may be limited on Android 11+ without QUERY_ALL_PACKAGES
+
+### Help Us Test!
+If you've successfully used this module on Android 12+, please report your results:
+- Open an issue with your Android version, Magisk version, and device info
+- We'll update the compatibility list based on your feedback
+
 ## Error?
  Go to the menu and type `logs`, this will upload the log files of this module and will generate a link. Send that :)
  Alternatively, Send `/data/local/tmp/terminal_debloater-verbose.log` in the XDA thread. I'll examine it for problems and will try to fix it.
 
 ## Changelog
+
+### v18.0.1
+* Future-proofed Android version detection code
+* Added explicit comments for Android 11+ path handling
+* Updated documentation with tested vs theoretical compatibility
+* No functional changes for currently supported versions
 
 ### v18.0.0
 * Modernized to current Magisk module template format
