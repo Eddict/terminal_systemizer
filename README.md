@@ -53,6 +53,13 @@ If you've successfully used this module on Android 12+, please report your resul
 
 ## Changelog
 
+### v18.0.8
+* **CRITICAL FIX**: Make aapt optional with graceful error handling
+* Fixes empty app list on Android 15 when aapt crashes on modern APK formats
+* Apps now display with package names when aapt fails (better than nothing!)
+* Script continues working even if aapt binary is incompatible
+* Note: App labels will show as package names (com.example.app) until aapt is updated
+
 ### v18.0.7
 * **CRITICAL FIX**: Initialize counter variable `c=0` in list_installed_apps()
 * Fixes empty app list when trying to systemize installed apps
