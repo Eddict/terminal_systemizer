@@ -1,7 +1,7 @@
 id=terminal_systemizer
 name=App Systemizer (Terminal Emulator)
-version=v18.0.1
-versionCode=81
+version=v18.0.2
+versionCode=82
 author=veez21, KreAch3R, Eddict
 description=Turn apps to System Apps Systemlessly! Designed for Android 6-11, code updated for Android 12-15 (untested).
 minMagisk=20400

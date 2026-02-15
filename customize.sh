@@ -27,7 +27,7 @@ REPLACE="
 # Module display name
 ui_print "*******************************"
 ui_print "   Terminal App Systemizer     "
-ui_print "  by veez21 @ xda-developers   "
+ui_print "  by veez21, KreAch3R, Eddict   "
 ui_print "*******************************"
 
 # Custom installation steps (extracted from install.sh lines 133-188)

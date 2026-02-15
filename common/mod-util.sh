@@ -2,6 +2,7 @@
 #
 # Terminal Utility Functions
 # by veez21
+# Modernized by Eddict
 #
 ##########################################################################################
 

@@ -53,6 +53,11 @@ If you've successfully used this module on Android 12+, please report your resul
 
 ## Changelog
 
+### v18.0.2
+* Updated authorship credits throughout codebase
+* Changed donation link to reflect current maintainer
+* Added comprehensive credits section
+
 ### v18.0.1
 * Future-proofed Android version detection code
 * Added explicit comments for Android 11+ path handling
@@ -118,3 +123,17 @@ If you've successfully used this module on Android 12+, please report your resul
 * Make "Enter Label" option faster and more efficient
 * Name apk to it's parent folder
 * Misc improvements
+
+## Credits
+
+### Original Authors
+- **veez21** - Original Terminal Systemizer concept and implementation
+- **KreAch3R** - Android 11 support
+- **jenslody** - Android 11 support contributions
+
+### Modernization
+- **Eddict** - Modern Magisk template migration (v18.0+), GitHub Actions automation, Android 12-15 compatibility updates
+
+### Special Thanks
+- The Magisk development team for the modding framework
+- XDA Developers community for testing and feedback
