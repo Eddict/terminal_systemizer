@@ -139,7 +139,19 @@ list_installed_apps() {
           # Path format: /data/app/com.example.app-randomString/base.apk
           dir_app[c]=/data/app/$app-*/base.apk
         fi
-        $use_aapt && { app=$(aapt d badging ${dir_app[c]} | grep 'application-label:'); app=${app#*:}; }
+        # Try to get friendly app name from aapt, fall back to package name if it fails
+        if $use_aapt; then
+          # Capture aapt output and check its exit code directly (not the pipeline's)
+          # Note: 2>/dev/null suppresses expected "Aborted" errors on incompatible APKs
+          if app_label=$(aapt d badging "${dir_app[c]}" 2>/dev/null); then
+            # aapt succeeded, extract the label
+            app_label=$(echo "$app_label" | grep 'application-label:' | head -1)
+            if [ -n "$app_label" ]; then
+              app=${app_label#*:}
+            fi
+          fi
+          # If aapt fails or returns empty, 'app' stays as package name (already set at line 129)
+        fi
         app1[c]=$(echo "$app" | tr ' ' '_' | tr -d "'")
         echo "app${c}^=${app1[c]}^=${dir_app[c]}^=${package[c]}^=" >> $LISTFILE
         c=$((c+1))
@@ -164,7 +176,19 @@ list_systemized_apps() {
     rev_label=${i%/*}
     rev_label[cc]=${rev_label##*/}
     rev_app[cc]=${rev_label[cc]}
-    $use_aapt && { rev_app=$(aapt d badging $i | grep 'application-label:'); rev_app=${rev_app#*:}; rev_app[cc]=$(echo $rev_app | tr ' ' '_' | tr -d "'"); }
+    # Try to get friendly app name from aapt, fall back to label if it fails
+    if $use_aapt; then
+      # Capture aapt output and check its exit code directly (not the pipeline's)
+      if app_label=$(aapt d badging "$i" 2>/dev/null); then
+        # aapt succeeded, extract the label
+        app_label=$(echo "$app_label" | grep 'application-label:' | head -1)
+        if [ -n "$app_label" ]; then
+          rev_app=${app_label#*:}
+          rev_app[cc]=$(echo $rev_app | tr ' ' '_' | tr -d "'")
+        fi
+      fi
+      # If aapt fails, rev_app[cc] stays as rev_label[cc] (directory name)
+    fi
     cc=$((cc+1))
   done
 }
@@ -188,10 +212,17 @@ systemize() {
     else
       name=${apkdir%/*}; name=${name##*/}
       name=$(echo $name | tr -d ' ' | tr -d "'" | tr -d '*' | tr -d '-')
-      $use_aapt && {
-        name=$(aapt d badging $apkdir | head -n1 | awk '{print $2}')
-        name=$(echo ${name#*=} | tr -d ' ' | tr -d "'")
-      }
+      if $use_aapt; then
+        # Capture aapt output and check its exit code directly (not the pipeline's)
+        if pkg_name=$(aapt d badging "$apkdir" 2>/dev/null); then
+          # aapt succeeded, extract package name
+          pkg_name=$(echo "$pkg_name" | head -n1 | awk '{print $2}')
+          if [ -n "$pkg_name" ]; then
+            name=$(echo ${pkg_name#*=} | tr -d ' ' | tr -d "'")
+          fi
+        fi
+        # If aapt fails, 'name' stays as extracted from path
+      fi
     fi
   fi
   chk_apk_size $apkdir
@@ -263,9 +294,16 @@ enter_apk_dir() {
       echo " - OK"
       echo -n "Checking package name"
       name=${apk%'.apk'*}
-      if [ $use_aapt ]; then
-        name=$(aapt d badging $apkdir | head -n1 | awk '{print $2}')
-        name=${name#*=}
+      if $use_aapt; then
+        # Capture aapt output and check its exit code directly (not the pipeline's)
+        if pkg_name=$(aapt d badging "$apkdir" 2>/dev/null); then
+          # aapt succeeded, extract package name
+          pkg_name=$(echo "$pkg_name" | head -n1 | awk '{print $2}')
+          if [ -n "$pkg_name" ]; then
+            name=${pkg_name#*=}
+          fi
+        fi
+        # If aapt fails, 'name' stays as ${apk%'.apk'*}
       fi
       name=$(echo $name | tr -d ' ' | tr -d "'")
       echo " - $name"
