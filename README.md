@@ -53,6 +53,12 @@ If you've successfully used this module on Android 12+, please report your resul
 
 ## Changelog
 
+### v18.0.4
+* **CRITICAL FIX**: Actually call set_permissions() in customize.sh
+* Fixes "mod-util.sh: No such file or directory" error
+* Module now properly installs required files (aapt, mod-util.sh)
+* systemize command now works correctly after installation
+
 ### v18.0.2
 * Updated authorship credits throughout codebase
 * Changed donation link to reflect current maintainer

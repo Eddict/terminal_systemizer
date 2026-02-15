@@ -102,4 +102,11 @@ set_permissions() {
   echo "selinux=${se_value}" >> $MODPATH/module.prop
 }
 
+##########################################################################################
+# Call set_permissions
+##########################################################################################
+
+# CRITICAL: Modern Magisk template requires explicitly calling set_permissions()
+# In the old template (install.sh), this was called automatically by the framework
+# In the new template (customize.sh), we must call it explicitly
 set_permissions
