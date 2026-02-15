@@ -46,13 +46,23 @@ set_busybox() {
 _busybox=false
 if $_busybox; then
   true
+# Check Magisk's BusyBox locations first (most common for Magisk modules)
+elif [ -x /data/adb/magisk/busybox ]; then
+  _bb=/data/adb/magisk/busybox
+elif [ -x /data/adb/ap/bin/busybox ]; then
+  _bb=/data/adb/ap/bin/busybox
+elif [ -x /debug_ramdisk/.magisk/busybox/busybox ]; then
+  _bb=/debug_ramdisk/.magisk/busybox/busybox
+# Fall back to traditional system locations
 elif [ -x $SYSTEM2/xbin/busybox ]; then
   _bb=$SYSTEM2/xbin/busybox
 elif [ -x $SYSTEM2/bin/busybox ]; then
   _bb=$SYSTEM2/bin/busybox
 else
-  echo "! Busybox not detected"
-  echo "Please install one (@osm0sis' busybox recommended)"
+  echo "! BusyBox not detected in any known location"
+  echo "! Checked: Magisk directories and system paths"
+  echo "! Continuing with system tools (may be slower)"
+  echo "! To improve performance, install @osm0sis' busybox module"
   false
 fi
 set_busybox $_bb

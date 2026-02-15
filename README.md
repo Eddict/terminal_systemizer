@@ -53,6 +53,12 @@ If you've successfully used this module on Android 12+, please report your resul
 
 ## Changelog
 
+### v18.0.6
+* Improved BusyBox detection to check Magisk installation directories first
+* Added support for multiple Magisk BusyBox locations
+* Better error messages when BusyBox not found
+* Module now properly detects and uses Magisk's built-in BusyBox
+
 ### v18.0.5
 * **CRITICAL FIX**: Fixed source path for common files in customize.sh
 * Changed from `$TMPDIR` (old template) to `$MODPATH/common/` (modern template)
