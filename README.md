@@ -53,6 +53,12 @@ If you've successfully used this module on Android 12+, please report your resul
 
 ## Changelog
 
+### v18.0.5
+* **CRITICAL FIX**: Fixed source path for common files in customize.sh
+* Changed from `$TMPDIR` (old template) to `$MODPATH/common/` (modern template)
+* aapt and mod-util.sh now properly copied to module root
+* systemize command now works correctly
+
 ### v18.0.4
 * **CRITICAL FIX**: Actually call set_permissions() in customize.sh
 * Fixes "mod-util.sh: No such file or directory" error
