@@ -142,6 +142,7 @@ list_installed_apps() {
         # Try to get friendly app name from aapt, fall back to package name if it fails
         if $use_aapt; then
           # Capture aapt output and check its exit code directly (not the pipeline's)
+          # Note: 2>/dev/null suppresses expected "Aborted" errors on incompatible APKs
           if app_label=$(aapt d badging "${dir_app[c]}" 2>/dev/null); then
             # aapt succeeded, extract the label
             app_label=$(echo "$app_label" | grep 'application-label:' | head -1)
